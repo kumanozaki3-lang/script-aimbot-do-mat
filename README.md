@@ -1,1 +1,0 @@
-# script-aimbot-do-mat

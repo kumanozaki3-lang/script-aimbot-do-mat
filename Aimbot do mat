@@ -1,0 +1,344 @@
+-- Criar ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "ModernUI"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+screenGui.ResetOnSpawn = false
+
+-- Criar painel principal
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 400, 0, 300)
+mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+mainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+mainFrame.BackgroundTransparency = 0.1
+mainFrame.BorderSizePixel = 0
+mainFrame.ClipsDescendants = true
+mainFrame.Parent = screenGui
+
+-- Arredondar bordas
+local corners = Instance.new("UICorner")
+corners.CornerRadius = UDim.new(0, 20)
+corners.Parent = mainFrame
+
+-- Sombra
+local shadow = Instance.new("UIShadow")
+shadow.Color = Color3.fromRGB(0, 0, 0)
+shadow.Offset = Vector2.new(0, 5)
+shadow.Size = 10
+shadow.Transparency = 0.3
+shadow.Parent = mainFrame
+
+-- Título
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Size = UDim2.new(1, 0, 0, 50)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "CONTROL PANEL"
+titleLabel.TextColor3 = Color3.fromRGB(200, 200, 220)
+titleLabel.TextSize = 20
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.TextXAlignment = Enum.TextXAlignment.Center
+titleLabel.Parent = mainFrame
+
+-- Linha divisória
+local divider = Instance.new("Frame")
+divider.Size = UDim2.new(0.9, 0, 0, 1)
+divider.Position = UDim2.new(0.05, 0, 0, 50)
+divider.BackgroundColor3 = Color3.fromRGB(0, 255, 255)
+divider.BackgroundTransparency = 0.7
+divider.BorderSizePixel = 0
+divider.Parent = mainFrame
+
+-- Indicador de status
+local statusFrame = Instance.new("Frame")
+statusFrame.Size = UDim2.new(0, 120, 0, 30)
+statusFrame.Position = UDim2.new(1, -130, 0, 10)
+statusFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 50)
+statusFrame.BackgroundTransparency = 0.3
+statusFrame.BorderSizePixel = 0
+statusFrame.Parent = mainFrame
+
+local statusCorner = Instance.new("UICorner")
+statusCorner.CornerRadius = UDim.new(0, 15)
+statusCorner.Parent = statusFrame
+
+local statusDot = Instance.new("Frame")
+statusDot.Size = UDim2.new(0, 8, 0, 8)
+statusDot.Position = UDim2.new(0, 10, 0.5, -4)
+statusDot.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+statusDot.BorderSizePixel = 0
+statusDot.Parent = statusFrame
+
+local statusDotCorner = Instance.new("UICorner")
+statusDotCorner.CornerRadius = UDim.new(1, 0)
+statusDotCorner.Parent = statusDot
+
+local statusText = Instance.new("TextLabel")
+statusText.Size = UDim2.new(1, -20, 1, 0)
+statusText.Position = UDim2.new(0, 20, 0, 0)
+statusText.BackgroundTransparency = 1
+statusText.Text = "Desativado"
+statusText.TextColor3 = Color3.fromRGB(255, 255, 255)
+statusText.TextSize = 12
+statusText.Font = Enum.Font.GothamMedium
+statusText.TextXAlignment = Enum.TextXAlignment.Left
+statusText.TextYAlignment = Enum.TextYAlignment.Center
+statusText.Parent = statusFrame
+
+-- Botão Aimbot
+local aimbotButton = Instance.new("TextButton")
+aimbotButton.Size = UDim2.new(0, 200, 0, 50)
+aimbotButton.Position = UDim2.new(0.5, -100, 0.3, 0)
+aimbotButton.BackgroundColor3 = Color3.fromRGB(0, 100, 200)
+aimbotButton.BorderSizePixel = 0
+aimbotButton.Text = "AIMBOT"
+aimbotButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+aimbotButton.TextSize = 18
+aimbotButton.Font = Enum.Font.GothamBold
+aimbotButton.Parent = mainFrame
+
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(0, 12)
+buttonCorner.Parent = aimbotButton
+
+-- Efeito hover do botão
+local buttonStroke = Instance.new("UIStroke")
+buttonStroke.Color = Color3.fromRGB(0, 200, 255)
+buttonStroke.Thickness = 2
+buttonStroke.Transparency = 0.8
+buttonStroke.Parent = aimbotButton
+
+-- Campo de texto
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(0, 250, 0, 45)
+textBox.Position = UDim2.new(0.5, -125, 0.6, 0)
+textBox.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
+textBox.BorderSizePixel = 0
+textBox.Text = "Digite algo aqui..."
+textBox.TextColor3 = Color3.fromRGB(180, 180, 200)
+textBox.TextSize = 14
+textBox.Font = Enum.Font.GothamMedium
+textBox.ClearTextOnFocus = false
+textBox.Parent = mainFrame
+
+local textBoxCorner = Instance.new("UICorner")
+textBoxCorner.CornerRadius = UDim.new(0, 10)
+textBoxCorner.Parent = textBox
+
+-- Efeito focus do textbox
+local textBoxStroke = Instance.new("UIStroke")
+textBoxStroke.Color = Color3.fromRGB(0, 200, 255)
+textBoxStroke.Thickness = 1
+textBoxStroke.Transparency = 1
+textBoxStroke.Parent = textBox
+
+-- Criar círculo de detecção
+local detectionCircle = Instance.new("Frame")
+detectionCircle.Name = "DetectionCircle"
+detectionCircle.Size = UDim2.new(0, 150, 0, 150)
+detectionCircle.Position = UDim2.new(0.5, -75, 0.5, -75)
+detectionCircle.BackgroundTransparency = 1
+detectionCircle.BorderSizePixel = 0
+detectionCircle.Visible = false
+detectionCircle.Parent = screenGui
+
+-- Borda do círculo
+local circleBorder = Instance.new("Frame")
+circleBorder.Size = UDim2.new(1, 0, 1, 0)
+circleBorder.Position = UDim2.new(0, 0, 0, 0)
+circleBorder.BackgroundTransparency = 1
+circleBorder.BorderSizePixel = 0
+circleBorder.Parent = detectionCircle
+
+local circleCorner = Instance.new("UICorner")
+circleCorner.CornerRadius = UDim.new(1, 0)
+circleCorner.Parent = circleBorder
+
+-- Efeito glow do círculo
+local glowEffect = Instance.new("Frame")
+glowEffect.Size = UDim2.new(1.2, 0, 1.2, 0)
+glowEffect.Position = UDim2.new(-0.1, 0, -0.1, 0)
+glowEffect.BackgroundColor3 = Color3.fromRGB(0, 200, 255)
+glowEffect.BackgroundTransparency = 0.9
+glowEffect.BorderSizePixel = 0
+glowEffect.Parent = circleBorder
+
+local glowCorner = Instance.new("UICorner")
+glowCorner.CornerRadius = UDim.new(1, 0)
+glowCorner.Parent = glowEffect
+
+-- Borda principal
+local mainBorder = Instance.new("UIStroke")
+mainBorder.Color = Color3.fromRGB(0, 200, 255)
+mainBorder.Thickness = 2
+mainBorder.Transparency = 0.5
+mainBorder.Parent = circleBorder
+
+-- Animação suave de aparecimento do círculo
+local circleTweenInfo = TweenInfo.new(
+    0.5,
+    Enum.EasingStyle.Quad,
+    Enum.EasingDirection.Out
+)
+
+-- Variável de estado
+local isActive = false
+local currentCircle = nil
+
+-- Função para criar animação de clique do botão
+local function animateButton(button)
+    local originalSize = button.Size
+    local tweenService = game:GetService("TweenService")
+    
+    local pressTween = tweenService:Create(button, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        Size = UDim2.new(originalSize.X.Scale, originalSize.X.Offset - 5, originalSize.Y.Scale, originalSize.Y.Offset - 5)
+    })
+    
+    local releaseTween = tweenService:Create(button, TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+        Size = originalSize
+    })
+    
+    pressTween:Play()
+    pressTween.Completed:Connect(function()
+        releaseTween:Play()
+    end)
+end
+
+-- Função para atualizar indicador de status
+local function updateStatus(active)
+    local tweenService = game:GetService("TweenService")
+    
+    if active then
+        statusText.Text = "Ativado"
+        statusDot.BackgroundColor3 = Color3.fromRGB(50, 255, 50)
+        statusDot.BackgroundTransparency = 0
+        
+        -- Animação do status dot
+        local pulseTween = tweenService:Create(statusDot, TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, -1, true), {
+            BackgroundTransparency = 0.5
+        })
+        pulseTween:Play()
+        
+        aimbotButton.BackgroundColor3 = Color3.fromRGB(0, 150, 255)
+        buttonStroke.Transparency = 0.3
+    else
+        statusText.Text = "Desativado"
+        statusDot.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+        statusDot.BackgroundTransparency = 0
+        aimbotButton.BackgroundColor3 = Color3.fromRGB(0, 100, 200)
+        buttonStroke.Transparency = 0.8
+    end
+end
+
+-- Função para mostrar/esconder círculo com animação
+local function toggleCircle(show)
+    local tweenService = game:GetService("TweenService")
+    
+    if show then
+        detectionCircle.Visible = true
+        detectionCircle.BackgroundTransparency = 1
+        
+        local appearTween = tweenService:Create(detectionCircle, circleTweenInfo, {
+            Size = UDim2.new(0, 150, 0, 150)
+        })
+        
+        local fadeTween = tweenService:Create(circleBorder, circleTweenInfo, {
+            BackgroundTransparency = 0
+        })
+        
+        appearTween:Play()
+        fadeTween:Play()
+    else
+        local disappearTween = tweenService:Create(detectionCircle, circleTweenInfo, {
+            Size = UDim2.new(0, 0, 0, 0)
+        })
+        
+        disappearTween:Play()
+        disappearTween.Completed:Connect(function()
+            detectionCircle.Visible = false
+            detectionCircle.Size = UDim2.new(0, 150, 0, 150)
+        end)
+    end
+end
+
+-- Evento do botão
+aimbotButton.MouseButton1Click:Connect(function()
+    animateButton(aimbotButton)
+    isActive = not isActive
+    updateStatus(isActive)
+    toggleCircle(isActive)
+    
+    -- Feedback sonoro (opcional)
+    -- game:GetService("SoundService"):PlayLocalSound(clickSound)
+end)
+
+-- Eventos do TextBox
+textBox.Focused:Connect(function()
+    textBoxStroke.Transparency = 0.5
+    textBox.Text = ""
+end)
+
+textBox.FocusLost:Connect(function(enterPressed)
+    textBoxStroke.Transparency = 1
+    if textBox.Text == "" then
+        textBox.Text = "Digite algo aqui..."
+    end
+end)
+
+-- Efeito hover no botão
+aimbotButton.MouseEnter:Connect(function()
+    buttonStroke.Thickness = 3
+end)
+
+aimbotButton.MouseLeave:Connect(function()
+    if isActive then
+        buttonStroke.Thickness = 2
+    else
+        buttonStroke.Thickness = 2
+    end
+end)
+
+-- Animação de entrada do painel principal
+local tweenService = game:GetService("TweenService")
+local panelAppear = tweenService:Create(mainFrame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
+    Position = UDim2.new(0.5, -200, 0.5, -150)
+})
+panelAppear:Play()
+
+-- Atualização do círculo para seguir o mouse (simulação de aimbot)
+local userInputService = game:GetService("UserInputService")
+
+userInputService.InputChanged:Connect(function(input)
+    if isActive and input.UserInputType == Enum.UserInputType.MouseMovement then
+        local mousePos = userInputService:GetMouseLocation()
+        detectionCircle.Position = UDim2.new(0, mousePos.X - 75, 0, mousePos.Y - 75)
+    end
+end)
+
+-- Responsividade
+local function updateUI()
+    local screenSize = game:GetService("GuiService"):GetScreenSize()
+    
+    -- Ajustar tamanhos baseados na resolução
+    if screenSize.X < 800 then
+        mainFrame.Size = UDim2.new(0, 350, 0, 280)
+        mainFrame.Position = UDim2.new(0.5, -175, 0.5, -140)
+        aimbotButton.Size = UDim2.new(0, 180, 0, 45)
+        aimbotButton.Position = UDim2.new(0.5, -90, 0.3, 0)
+        textBox.Size = UDim2.new(0, 220, 0, 40)
+        textBox.Position = UDim2.new(0.5, -110, 0.6, 0)
+    else
+        mainFrame.Size = UDim2.new(0, 400, 0, 300)
+        mainFrame.Position = UDim2.new(0.5, -200, 0.5, -150)
+        aimbotButton.Size = UDim2.new(0, 200, 0, 50)
+        aimbotButton.Position = UDim2.new(0.5, -100, 0.3, 0)
+        textBox.Size = UDim2.new(0, 250, 0, 45)
+        textBox.Position = UDim2.new(0.5, -125, 0.6, 0)
+    end
+end
+
+-- Conectar evento de redimensionamento da tela
+game:GetService("GuiService").ScreenSizeChanged:Connect(updateUI)
+updateUI()
+
+print("Interface carregada com sucesso!")
